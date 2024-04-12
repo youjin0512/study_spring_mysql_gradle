@@ -23,6 +23,16 @@
 
     <!-- 수정 -->
 	<update id="update" parameterType="Map">
-
+		update COMMON_CODE
+		SET CODE_NAME = #{CODE_NAME}
+		WHERE 1 = 1
+		AND PK_UNIQUE = #{PK_UNIQUE};
     </update>	
+
+    <!-- 삭제 -->
+	<delete id="delete" parameterType="Map">
+		DELETE FROM COMMON_CODE
+		WHERE 1 = 1
+		AND PK_UNIQUE = #{PK_UNIQUE};
+    </delete>	
 </mapper>

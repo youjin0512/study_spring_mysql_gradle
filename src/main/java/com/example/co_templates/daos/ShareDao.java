@@ -32,4 +32,10 @@ public class ShareDao {
         Object result = sqlSessionTemplate.update(sqlMapId, dataMap);
         return result;
     }
+
+    // 없앨 때
+    public Object delete(String sqlMapId, Object dataMap){
+        Object result = sqlSessionTemplate.delete(sqlMapId, dataMap);
+        return result;
+    }        
 }
