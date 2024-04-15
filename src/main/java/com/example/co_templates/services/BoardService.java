@@ -20,9 +20,10 @@ public class BoardService {
     @Autowired
     Commons commons;
 
-    public void list(HashMap<String,Object> dataMap){
+    public Object list(HashMap<String,Object> dataMap){
         String sqlMapId = "Board.selectBysearch";
         Object list = shareDao.getList(sqlMapId, dataMap);
+        return list;
     }
 
     public void insert(HashMap<String,Object> dataMap){
