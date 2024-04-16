@@ -1,13 +1,16 @@
-<%@ page import="java.util.HashMap, java.util.ArrayList" %>
+셀렉트<%@ page import="java.util.HashMap, java.util.ArrayList" %>
     <!DOCTYPE html>
     <html lang="en">
+
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Bootstrap 5 Template</title>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css">
     </head>
+
     <body>
+
         <!-- Menu -->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container">
@@ -31,12 +34,14 @@
                 </div>
             </div>
         </nav>
+
         <!-- Main Content -->
         <form action="/commonCode/list" method="get">
             <div class="container mt-4">
                 <div class="row">
                     <div class="col-md-8">
                         <h2>Search</h2>
+
                         <% HashMap dataMap=(HashMap) request.getAttribute("dataMap"); String search=(String)
                             dataMap.getOrDefault("search", "" ); %>
                             <div class="input-group mb-3">
@@ -55,29 +60,31 @@
                         <table class="table">
                             <thead>
                                 <th>Del</th>
-                                <th>PK_UNIQUE</th>
+                                <th>PK_ID</th>
                                 <th>CODE_NAME</th>
                                 <th>DESCRIPTION</th>
                             </thead>
                             <tbody>
-                                <%  HashMap result =  (HashMap) request.getAttribute("result") ;
-                                ArrayList itemList =  (ArrayList) result.get("resultList");
-                                    
-                                    for(Object obj: itemList) { 
-                                        HashMap record=(HashMap) obj; %>
+                                <% 
+                                    HashMap result = (HashMap) request.getAttribute("result");
+                                    ArrayList itemList = (ArrayList) result.get("resultList");
+
+                                    for(Object obj: itemList){
+                                        HashMap record=(HashMap) obj;
+                                        %>
                                     <tr>
                                         <td>
                                             <input type="checkbox" class="form-check-input" name="deleteIds"
                                                 value='<%= record.get("PK_ID") %>'>
                                         </td>
                                         <td>
-                                            <%= record.get("PK_UNIQUE") %>
+                                            <%= record.get("PK_ID") %>
                                         </td>
                                         <td>
-                                            <%= record.get("CODE_NAME") %>
+                                            <%= record.get("FK_ID") %>
                                         </td>
                                         <td>
-                                            <%= record.get("DESCRIPTION") %>
+                                            <%= record.get("NAME") %>
                                         </td>
                                     </tr>
                                     <% } %>
@@ -90,11 +97,14 @@
                     <ul class="pagination justify-content-center">
                         <li class="page-item"><button class="page-link" type="submit" name="currentPage"
                                 value="Previous">Previous</button></li>
-                        <li class="page-item"><button class="page-link" type="submit" name="currentPage" value="1">1</button>
+                        <li class="page-item"><button class="page-link" type="submit" name="currentPage"
+                                value="1">1</button>
                         </li>
-                        <li class="page-item"><button class="page-link" type="submit" name="currentPage" value="2">2</button>
+                        <li class="page-item"><button class="page-link" type="submit" name="currentPage"
+                                value="2">2</button>
                         </li>
-                        <li class="page-item"><button class="page-link" type="submit" name="currentPage" value="3">3</button>
+                        <li class="page-item"><button class="page-link" type="submit" name="currentPage"
+                                value="3">3</button>
                         </li>
                         <li class="page-item"><button class="page-link" type="submit" name="currentPage"
                                 value="Next">Next</button>
@@ -103,12 +113,15 @@
                 </nav>
             </div>
         </form>
+
         <!-- Footer -->
         <footer class="bg-dark text-white text-center py-4 mt-4">
             <div class="container">
                 <p>&copy; 2023 Your Website. All Rights Reserved.</p>
             </div>
         </footer>
+
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
     </body>
+
     </html>
