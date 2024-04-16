@@ -20,7 +20,8 @@ public class CommonCodeController {
 
     @GetMapping("/commonCode/list")
     public ModelAndView list(ModelAndView modelAndView
-                    , @RequestParam HashMap dataMap) {
+                    , @RequestParam HashMap<String, Object> dataMap
+                    , @RequestParam(name="deleteIds", required = false) ArrayList<String> deleteIds) {
         ArrayList<HashMap<String, Object>> itemList = new ArrayList<HashMap<String, Object>>();
         // Call Service with Pure Java
         // CommonCodeService commonCodeService = new CommonCodeService();
