@@ -1,4 +1,4 @@
-셀렉트<%@ page import="java.util.HashMap, java.util.ArrayList" %>
+<%@ page import="java.util.HashMap, java.util.ArrayList, com.example.co_templates.utils.Paginations" %>
     <!DOCTYPE html>
     <html lang="en">
 
@@ -36,7 +36,7 @@
         </nav>
 
         <!-- Main Content -->
-        <form action="/commonCode/list" method="get">
+        <form action="/commonCode/list_pagination" method="get">
             <div class="container mt-4">
                 <div class="row">
                     <div class="col-md-8">
@@ -60,7 +60,7 @@
                         <table class="table">
                             <thead>
                                 <th>Del</th>
-                                <th>PK_ID</th>
+                                <th>PK_UNIQUE</th>
                                 <th>CODE_NAME</th>
                                 <th>DESCRIPTION</th>
                             </thead>
@@ -68,23 +68,22 @@
                                 <% 
                                     HashMap result = (HashMap) request.getAttribute("result");
                                     ArrayList itemList = (ArrayList) result.get("resultList");
-
-                                    for(Object obj: itemList){
-                                        HashMap record=(HashMap) obj;
-                                        %>
+                                    
+                                    for(Object obj: itemList)
+                                    { HashMap record=(HashMap) obj; %>
                                     <tr>
                                         <td>
                                             <input type="checkbox" class="form-check-input" name="deleteIds"
                                                 value='<%= record.get("PK_ID") %>'>
                                         </td>
                                         <td>
-                                            <%= record.get("PK_ID") %>
+                                            <%= record.get("PK_UNIQUE") %>
                                         </td>
                                         <td>
-                                            <%= record.get("FK_ID") %>
+                                            <%= record.get("CODE_NAME") %>
                                         </td>
                                         <td>
-                                            <%= record.get("NAME") %>
+                                            <%= record.get("DESCRIPTION") %>
                                         </td>
                                     </tr>
                                     <% } %>
@@ -93,21 +92,31 @@
                     </div>
                 </div>
                 <!-- Pagination with buttons and query parameters -->
+                <% 
+                    Paginations paginations = (Paginations) result.get("paginations");
+                %>
                 <nav aria-label="Page navigation">
+                    <div>Total Count : <%= paginations.getTotalCount() %></div>
                     <ul class="pagination justify-content-center">
-                        <li class="page-item"><button class="page-link" type="submit" name="currentPage"
-                                value="Previous">Previous</button></li>
-                        <li class="page-item"><button class="page-link" type="submit" name="currentPage"
-                                value="1">1</button>
+                        <li class="page-item">
+                            <button class="page-link" type="submit" name="currentPage" value="Previous">Previous</button></li>
+                        <% 
+                            for(int i=paginations.getBlockStart(); i <= paginations.getBlockEnd(); i++){
+                        %>
+                        <li class="page-item">
+                            <button class="page-link" type="submit" name="currentPage" value="<%= i %>"><%= i %></button>
                         </li>
-                        <li class="page-item"><button class="page-link" type="submit" name="currentPage"
-                                value="2">2</button>
+                        <%
+                            }
+                        %>
+                        <!-- <li class="page-item">
+                            <button class="page-link" type="submit" name="currentPage" value="2">2</button>
                         </li>
-                        <li class="page-item"><button class="page-link" type="submit" name="currentPage"
-                                value="3">3</button>
-                        </li>
-                        <li class="page-item"><button class="page-link" type="submit" name="currentPage"
-                                value="Next">Next</button>
+                        <li class="page-item">
+                            <button class="page-link" type="submit" name="currentPage" value="3">3</button>
+                        </li> -->
+                        <li class="page-item">
+                            <button class="page-link" type="submit" name="currentPage" value="Next">Next</button>
                         </li>
                     </ul>
                 </nav>

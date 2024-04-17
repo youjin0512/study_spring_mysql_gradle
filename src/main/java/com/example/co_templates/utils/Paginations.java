@@ -1,5 +1,6 @@
 package com.example.co_templates.utils;
 
+// components
 public class Paginations {
 	private int pageScale = 10; // 페이지당 게시물 수
 	private int blockScale = 5; // 블록당 페이지수
