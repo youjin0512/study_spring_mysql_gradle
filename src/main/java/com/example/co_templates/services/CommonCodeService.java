@@ -1,6 +1,7 @@
 package com.example.co_templates.services;
 
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,6 +19,9 @@ public class CommonCodeService {
 
     @Autowired
     Commons commons;
+
+    // @Autowired
+    // Paginations paginations;
 
     public Object selectMany(HashMap<String, Object> dataMap) {
         // 여러개 가져오기
